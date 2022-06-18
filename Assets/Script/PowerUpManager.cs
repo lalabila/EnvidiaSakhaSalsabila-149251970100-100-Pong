@@ -12,6 +12,8 @@ public class PowerUpManager : MonoBehaviour
     public float despawn;
     private float timer;
     public float magnitude;
+    public GameObject rightPaddle;
+    public GameObject leftPaddle;
 
     public List<GameObject> powerUpTemplateList;
 
@@ -32,6 +34,11 @@ public class PowerUpManager : MonoBehaviour
             GenerateRandomPowerUp();
             timer -= spawnInterval;
         }
+
+        // if()
+        // {
+
+        // }
     }
 
 
@@ -75,6 +82,46 @@ public class PowerUpManager : MonoBehaviour
         while (powerUpList.Count > 0)
         {
             RemovePowerUp(powerUpList[0]);
+        }
+    }
+    public IEnumerator PowerUp (float duration, GameObject paddle)
+    {
+    Debug.Log("Power up started");
+    paddle.GetComponent<PaddleController>().ActivatePUSpeedPaddle(paddle);
+    yield return new WaitForSeconds(duration);
+    paddle.GetComponent<PaddleController>().DeactivatePUSpeedPaddle(paddle);
+    Debug.Log("Power up ended");
+    }
+
+    public IEnumerator PowerUpExpand (float duration, GameObject paddle)
+    {
+    Debug.Log("Power up started");
+    paddle.GetComponent<PaddleController>().ActivatePUScaleUp(paddle);
+    yield return new WaitForSeconds(duration);
+    paddle.GetComponent<PaddleController>().DeactivatePUScaleUp(paddle);
+    Debug.Log("Power up ended");
+    }
+
+    public void StartTimer(bool isRight)
+    {
+        if(isRight)
+        {
+            StartCoroutine(PowerUp(5, rightPaddle));
+        }
+        else
+        {
+            StartCoroutine(PowerUp(5, leftPaddle));
+        }
+    }
+    public void StartTimerExpand(bool isRight)
+    {
+        if(isRight)
+        {
+            StartCoroutine(PowerUpExpand(5, rightPaddle));
+        }
+        else
+        {
+            StartCoroutine(PowerUpExpand(5, leftPaddle));
         }
     }
 }

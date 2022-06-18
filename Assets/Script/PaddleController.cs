@@ -8,6 +8,7 @@ public class PaddleController : MonoBehaviour
     public KeyCode upKey;
     public KeyCode downKey;
     private Rigidbody2D rig;
+    private float timer;
 
     void Start()
     {
@@ -36,5 +37,23 @@ public class PaddleController : MonoBehaviour
     private void MoveObject(Vector2 movement)
     {
         rig.velocity = movement;
+    }
+
+    public void ActivatePUScaleUp(GameObject gameObject)
+    {
+        gameObject.transform.localScale += new Vector3(0, gameObject.transform.localScale.y, 0);
+    }
+    public void DeactivatePUScaleUp(GameObject gameObject)
+    {
+        gameObject.transform.localScale -= new Vector3(0, gameObject.transform.localScale.y/2, 0);
+    }
+
+    public void ActivatePUSpeedPaddle(GameObject gameObject)
+    {
+        speed *= 2;
+    }
+    public void DeactivatePUSpeedPaddle(GameObject gameObject)
+    {
+        speed /= 2;
     }
 }

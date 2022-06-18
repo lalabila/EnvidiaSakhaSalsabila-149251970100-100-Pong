@@ -10,9 +10,14 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void OpenAuthor()
+    public void OpenCredit()
     {
-        Debug.Log("Created By Envidia Sakha Salsabila - 149251970100-100");
+        SceneManager.LoadScene("Credit");
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
+
